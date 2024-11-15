@@ -10,13 +10,14 @@ import java.io.ByteArrayInputStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class InputVeiwUnitTest {
+public class InputViewUnitTest {
 
     private InputView inputVew;
 
     @BeforeEach
     void setUp() {
-        this.inputVew = new InputView();    }
+        this.inputVew = new InputView();
+    }
 
     @Test
     @DisplayName("정상 날짜 입력시 날짜 리턴")

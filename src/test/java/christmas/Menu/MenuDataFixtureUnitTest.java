@@ -1,6 +1,8 @@
 package christmas.Menu;
 
-import christmas.MenuDataFixture;
+import christmas.menu.Menu;
+import christmas.menu.MenuDataFixture;
+import christmas.menu.MenuType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,18 +15,30 @@ public class MenuDataFixtureUnitTest {
 
     @BeforeEach
     void setUp(){
-        this.menuData = menuData;
+        this.menuData = new MenuDataFixture();
     }
 
     @Test
-    @DisplayName("메뉴이름으로 가격,종류 조회")
+    @DisplayName("정상 메뉴이름으로 가격,종류 조회")
     public void give_menuName_when_search_then_get_price_and_type(){
         //given
-        String menuName = "양송이 수프";
+        String menuName = "양송이수프";
         //when
         Menu menu =  menuData.search(menuName);
         //then
-        assertEquals(menu.price,6000);
-        assertEquals(menu.type,MenuType.Appetizer);
+        assertEquals(menu.price(),6000);
+        assertEquals(menu.type(), MenuType.APPETIZER);
+    }
+
+    @Test
+    @DisplayName("잘못된 메뉴이름으로 가격,종류 조회")
+    public void give_wrong_menuName_when_search_then_get_price_and_type(){
+        //given
+        String menuName = "잘못된메뉴이름";
+        //when
+        Menu menu =  menuData.search(menuName);
+        //then
+        assertEquals(menu.price(),0);
+        assertEquals(menu.type(), MenuType.WRONG);
     }
 }
