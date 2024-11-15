@@ -30,7 +30,7 @@ public class OrderCreatorUnitTest {
         //then
         assertEquals(list.size(), 4);
         assertEquals(list.get(1).name(), "바비큐립");
-        assertEquals(list.get(2).quantity(), 2);
+        assertEquals(list.get(2).quantity(), "2");
     }
 
     @Test

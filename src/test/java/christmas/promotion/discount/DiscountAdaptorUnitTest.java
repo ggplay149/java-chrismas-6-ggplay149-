@@ -38,8 +38,8 @@ public class DiscountAdaptorUnitTest {
     public void weekday_discount(){
         //given
         List<Order> inputList = new ArrayList<>();
-        inputList.add(new Order("초코케이크",2));
-        inputList.add(new Order("양송이수프",2));
+        inputList.add(new Order("초코케이크","2"));
+        inputList.add(new Order("양송이수프","2"));
         //when
         int minusPrice = discountAdaptor.weekdayDiscount(inputList);
         //then
@@ -51,8 +51,8 @@ public class DiscountAdaptorUnitTest {
     public void weekend_discount(){
         //given
         List<Order> inputList = new ArrayList<>();
-        inputList.add(new Order("티본스테이크",1));
-        inputList.add(new Order("해산물파스타",2));
+        inputList.add(new Order("티본스테이크","1"));
+        inputList.add(new Order("해산물파스타","2"));
         //when
         int minusPrice = discountAdaptor.weekendDiscount(inputList);
         //then
@@ -65,7 +65,7 @@ public class DiscountAdaptorUnitTest {
         //given
         int finalPrice = 10000;
         //when
-        int minusPrice = discountAdaptor.specialDiscount(finalPrice);
+        int minusPrice = discountAdaptor.specialDiscount();
         //then
         assertEquals(minusPrice,1000);
     }

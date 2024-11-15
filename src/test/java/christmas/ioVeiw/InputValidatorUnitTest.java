@@ -56,8 +56,8 @@ public class InputValidatorUnitTest {
     public void given_menu_when_validMenu_then_true() {
         //given
         List<Order> testInput = new ArrayList<>();
-        testInput.add(new Order("양송이수프",1));
-        testInput.add(new Order("제로콜라",2));
+        testInput.add(new Order("양송이수프","1"));
+        testInput.add(new Order("제로콜라","2"));
         given(menuDataFixture.search(any())).willReturn(new Menu(6000, MenuType.APPETIZER));
         //when
         boolean result = inputValidator.validOrder(testInput);
@@ -70,7 +70,7 @@ public class InputValidatorUnitTest {
     public void given_wrong_order_when_validMenu_then_error() {
         //given
         List<Order> testInput = new ArrayList<>();
-        testInput.add(new Order("개밥",1));
+        testInput.add(new Order("개밥","1"));
         given(menuDataFixture.search(any())).willReturn(new Menu(0, MenuType.WRONG));
         //when
         Exception e = assertThrows(IllegalArgumentException.class, () -> inputValidator.validOrder(testInput));
@@ -84,7 +84,7 @@ public class InputValidatorUnitTest {
     public void given_0_quantity_when_validMenu_then_error() {
         //given
         List<Order> testInput = new ArrayList<>();
-        testInput.add(new Order("양송이수프",0));
+        testInput.add(new Order("양송이수프","0"));
         given(menuDataFixture.search(any())).willReturn(new Menu(6000, MenuType.APPETIZER));
         //when
         Exception e = assertThrows(IllegalArgumentException.class, () -> inputValidator.validOrder(testInput));
@@ -98,8 +98,8 @@ public class InputValidatorUnitTest {
     public void given_duplicated_order_when_validMenu_then_error() {
         //given
         List<Order> testInput = new ArrayList<>();
-        testInput.add(new Order("양송이수프",1));
-        testInput.add(new Order("양송이수프",2));
+        testInput.add(new Order("양송이수프","1"));
+        testInput.add(new Order("양송이수프","2"));
         given(menuDataFixture.search(any())).willReturn(new Menu(6000, MenuType.APPETIZER));
         //when
         Exception e = assertThrows(IllegalArgumentException.class, () -> inputValidator.validOrder(testInput));
