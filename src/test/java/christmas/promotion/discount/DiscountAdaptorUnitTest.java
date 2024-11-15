@@ -2,7 +2,6 @@ package christmas.promotion.discount;
 
 import christmas.menu.MenuDataFixture;
 import christmas.order.Order;
-import christmas.promotion.DiscountAdaptor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,9 +41,9 @@ public class DiscountAdaptorUnitTest {
         inputList.add(new Order("초코케이크",2));
         inputList.add(new Order("양송이수프",2));
         //when
-        int discountedPrice = discountAdaptor.weekdayDiscount(inputList);
+        int minusPrice = discountAdaptor.weekdayDiscount(inputList);
         //then
-        assertEquals(discountedPrice,2023);
+        assertEquals(minusPrice,2023);
     }
 
     @Test
@@ -55,9 +54,9 @@ public class DiscountAdaptorUnitTest {
         inputList.add(new Order("티본스테이크",1));
         inputList.add(new Order("해산물파스타",2));
         //when
-        int discountedPrice = discountAdaptor.weekendDiscount(inputList);
+        int minusPrice = discountAdaptor.weekendDiscount(inputList);
         //then
-        assertEquals(discountedPrice,4046);
+        assertEquals(minusPrice,4046);
     }
 
     @Test
@@ -66,9 +65,9 @@ public class DiscountAdaptorUnitTest {
         //given
         int finalPrice = 10000;
         //when
-        int discountedPrice = discountAdaptor.specialDiscount(finalPrice);
+        int minusPrice = discountAdaptor.specialDiscount(finalPrice);
         //then
-        assertEquals(discountedPrice,1000);
+        assertEquals(minusPrice,1000);
     }
 
 }

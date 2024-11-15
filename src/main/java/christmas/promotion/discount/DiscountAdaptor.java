@@ -1,4 +1,4 @@
-package christmas.promotion;
+package christmas.promotion.discount;
 
 import christmas.menu.MenuDataFixture;
 import christmas.menu.MenuType;
