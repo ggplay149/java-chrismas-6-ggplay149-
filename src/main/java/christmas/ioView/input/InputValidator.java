@@ -18,10 +18,17 @@ public class InputValidator {
     }
 
     public boolean validDate(String date) {
+
+        //숫자가 아닌경우 에러처리
+        if(!date.matches("\\d+")){
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+        }
+
         int selectedDate = Integer.parseInt(date);
         if (selectedDate < 1 || selectedDate > 31) {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         }
+
         return true;
     }
 
@@ -37,7 +44,12 @@ public class InputValidator {
         for(Order order : orderList){
 
             String name = order.name();
-            int quantity = order.quantity();
+            int quantity = 0;
+            try {
+                quantity = Integer.parseInt(order.quantity());
+            } catch (NumberFormatException e){
+                result = false;
+            }
 
             //없는 메뉴 체크
             if(menu.search(name).type() == MenuType.WRONG) result = false;
@@ -49,13 +61,17 @@ public class InputValidator {
             Set<String> set = new HashSet<>(nameList);
             if(set.size() != nameList.size()) result = false;
 
-            //input 형식 체크
-
-
         }
 
         if(!result) throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
 
+        return true;
+    }
+
+    public boolean validFormat(String input){
+        if(!input.matches("\\d+")){
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
         return true;
     }
 

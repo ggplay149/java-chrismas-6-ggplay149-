@@ -1,5 +1,6 @@
 package christmas.order;
 
+import christmas.ioView.input.InputValidator;
 import christmas.menu.MenuDataFixture;
 
 import java.util.ArrayList;
@@ -18,19 +19,19 @@ public class OrderCreator {
         String[] inputList = input.split(",");
         List<Order> orderList = new ArrayList<>();
 
-        for(String inputMenu : inputList){
+        for (String inputMenu : inputList) {
             String[] NameAndQuantity = inputMenu.split("-");
             String name = NameAndQuantity[0];
-            int quantity = Integer.parseInt(NameAndQuantity[1]);
-            orderList.add(new Order(name,quantity));
+            String quantity = NameAndQuantity[1];
+            orderList.add(new Order(name, quantity));
         }
-
         return orderList;
     }
 
+
     public int countTotalPrice(List<Order> orderList) {
         int totalPrice = 0;
-        for (Order order : orderList) totalPrice += (menu.search(order.name()).price()) * (order.quantity());
+        for (Order order : orderList) totalPrice += (menu.search(order.name()).price()) * (Integer.parseInt(order.quantity()));
         return totalPrice;
     }
 

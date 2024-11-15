@@ -18,12 +18,11 @@ public class DiscountAdaptor {
         this.menu = menu;
     }
 
-    public int discount(int inputDate, int beforePrice, List<Order> inputOrderList) {
+    public List<Promotion> discount(int inputDate, int beforeTotalPrice, List<Order> inputOrderList) {
 
-        //기존가격
-        int finalPrice = beforePrice;
-        //할인된가격
+        //할인가격
         int minusPrice = 0;
+
         //적용된 프로모션 리스트
         List<Promotion> adaptedPromotionList = new ArrayList<>();
 
@@ -32,36 +31,31 @@ public class DiscountAdaptor {
 
         // 크리스마스 디데이할인
         minusPrice = christmasDiscount(inputDate);
-        finalPrice -= minusPrice;
-        adaptedPromotionList.add(new Promotion("christmas", minusPrice));
+        adaptedPromotionList.add(new Promotion("크리스마스 디데이 할인", minusPrice));
 
         // 주말 할인
         if (day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY) {
             minusPrice = weekendDiscount(inputOrderList);
-            finalPrice -= minusPrice;
-            adaptedPromotionList.add(new Promotion("weekend", minusPrice));
+            adaptedPromotionList.add(new Promotion("주말 할인", minusPrice));
         }
 
         // 평일 할인
         if (day == DayOfWeek.MONDAY  || day == DayOfWeek.TUESDAY  || day == DayOfWeek.WEDNESDAY
                 || day == DayOfWeek.THURSDAY || day == DayOfWeek.FRIDAY) {
             minusPrice = weekdayDiscount(inputOrderList);
-            finalPrice -= minusPrice;
-            adaptedPromotionList.add(new Promotion("weekday", minusPrice));
+            adaptedPromotionList.add(new Promotion("평일 할인", minusPrice));
         }
 
 
         //특별 할인
         if (inputDate == 25 || day == DayOfWeek.SUNDAY) {
-            minusPrice = specialDiscount(finalPrice);
-            finalPrice -= minusPrice;
-            adaptedPromotionList.add(new Promotion("special", minusPrice));
+            minusPrice = specialDiscount();
+            adaptedPromotionList.add(new Promotion("특별 할인", minusPrice));
         }
 
-        return finalPrice;
+        return adaptedPromotionList;
 
     }
-
 
     public int christmasDiscount(int inputDate) {
         return 1000 + ((inputDate - 1) * 100);
@@ -85,7 +79,9 @@ public class DiscountAdaptor {
         return count*2023;
     }
 
-    public int specialDiscount(int finalPrice) {
+    public int specialDiscount() {
         return 1000;
     }
+
+
 }
