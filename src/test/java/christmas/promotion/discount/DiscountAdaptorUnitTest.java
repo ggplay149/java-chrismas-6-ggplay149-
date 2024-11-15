@@ -2,6 +2,7 @@ package christmas.promotion.discount;
 
 import christmas.menu.MenuDataFixture;
 import christmas.order.Order;
+import christmas.promotion.DiscountAdaptor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -50,22 +51,24 @@ public class DiscountAdaptorUnitTest {
     @DisplayName("주말할인 적용테스트")
     public void weekend_discount(){
         //given
-        int inputPrice = 10000;
+        List<Order> inputList = new ArrayList<>();
+        inputList.add(new Order("티본스테이크",1));
+        inputList.add(new Order("해산물파스타",2));
         //when
-        //int discountedPrice = discountAdaptor.discount();
+        int discountedPrice = discountAdaptor.weekendDiscount(inputList);
         //then
-       // assertEquals(discountedPrice,0);
+        assertEquals(discountedPrice,4046);
     }
 
     @Test
     @DisplayName("스페셜할인 적용테스트")
     public void special_discount(){
         //given
-        int inputPrice = 10000;
+        int finalPrice = 10000;
         //when
-       // int discountedPrice = discountAdaptor.discount();
+        int discountedPrice = discountAdaptor.specialDiscount(finalPrice);
         //then
-       // assertEquals(discountedPrice,0);
+        assertEquals(discountedPrice,1000);
     }
 
 }

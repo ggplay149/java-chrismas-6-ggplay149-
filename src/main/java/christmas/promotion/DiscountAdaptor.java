@@ -1,4 +1,4 @@
-package christmas.promotion.discount;
+package christmas.promotion;
 
 import christmas.menu.MenuDataFixture;
 import christmas.menu.MenuType;
@@ -85,7 +85,7 @@ public class DiscountAdaptor {
         return count*2023;
     }
 
-    private int specialDiscount(int finalPrice) {
-        return finalPrice - 1000;
+    public int specialDiscount(int finalPrice) {
+        return 1000;
     }
 }
